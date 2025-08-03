@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/authapp/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title>Sign up</title>
+    <style>
+        .input-field::placeholder{
+            font-size: 16px;
+        }
+        .signup-option {
+            align-self: inherit;
+            position: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="container drop-shadow lifted">
+        <form class="login-form">
+            <h5 class="larger-text">Create an account</h5>
+            <div class="field-wrapper">
+                <input class="input-field" type="text" id="firstname" name="firstname" placeholder="First name" required>
+                <div class="horizontal-line"></div>
+                <input class="input-field" type="text" id="lastname" name="lastname" placeholder="Last name" required>
+                <div class="horizontal-line"></div>
+                <input class="input-field" type="text" id="companyname" name="lastcompanynamename" placeholder="Company name (Optional)" required>
+                <div class="horizontal-line"></div>
+                <input class="input-field" type="text" id="username" name="username" placeholder="Username" required>
+                <div class="horizontal-line"></div>
+                <input class="input-field" type="password" id="password" name="password" placeholder="Password" required>
+                <div class="horizontal-line"></div>
+            </div>
+            <button class="small-text" type="submit">Sign up</button>
+            <div class="signup-option medium-text">
+                <span class="light">You acknowledge that you read, and agree to our</span><br>
+                <a href="#" class="signup-btn medium-text bold">Terms of Service</a> and <a href="#" class="signup-btn medium-text bold">Privacy Policy</a>
+            </div>
+                
+            
+            <!--div class="extra-options">
+                <a href="#">Forgot password?</a>
+            </div>
+            <div class="signup-option">
+                <span>Don't have an account?</span>
+                <a href="#" class="signup-btn">Sign Up</a>
+            </div-->
+            
+        </form>
+    </div>
+
+</body>
+</html>

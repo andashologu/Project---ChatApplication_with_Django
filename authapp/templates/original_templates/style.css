@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    background: linear-gradient(to bottom, #f1f6fb 0%, #fafcff 50%, #f1f6fb 100%);
+    
+}
+/*menu bar*/
+.menu-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: end;
+    flex-wrap: wrap;
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+    max-width: 1200px;
+    height: 120px;
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+}
+
+.sidebar {
+    width: 35%;
+}
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.contacts-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+}
+
+.contact-card {
+    display: flex;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.contact:hover {
+    background-color: #e6e6e6;
+}
+
+.contact-picture {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.contact-details h5 {
+    font-size: 16px;
+}
+
+.chat-window {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    /*padding: 0 25px;*/
+    gap: 15px;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+.chat-window .chat-area{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.active-contact-picture {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    /*padding: 20px;*/
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    position: relative;
+    max-width: 60%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 25px;
+}
+
+.sent {
+    background-color: black;
+    align-self: flex-end;
+    color: white;
+}
+
+.received {
+    align-self: flex-start;
+    color: black;
+    border: 1px solid lightgray;
+}
+
+.chat-input {
+    display: flex;
+    padding: 20px 10px;
+    background-color: white;
+    /*border-top: 1px solid #ccc;*/
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgb(194 194 194 / 10%), 0 6px 20px #f1f6fb;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    /*border-radius: 20px;*/
+    margin-right: 10px;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #009688;
+}
+
+/* Search Box */
+.search-box {
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgb(194 194 194 / 10%), 0 6px 20px #f1f6fb;
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+}
+.search-box input::placeholder{
+    color: #5f6368;
+}
+/*dynamic*/
+.small-text{
+    font-size: 15px;
+}
+.small-text.light, .smaller-text.light {
+    color: gray;
+}
+.smaller-text{
+    font-size: 12px;
+}
+.contact-details{
+    display: flex; 
+    flex-direction: column; 
+    flex-grow: 1;
+    justify-content: center;
+}
+.message-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+    align-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 7px;
+}
+.unread-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.message span.time{
+    position: absolute;
+    bottom: -18px;
+    right: 10px;
+}
+div.time{
+    text-align: center;
+    margin-bottom: 15px;
+    color: #777;
+    font-size: 14px;
+}

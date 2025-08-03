@@ -1,0 +1,21 @@
+{% for data in chats_data %}
+<div id="contact-{{ data.chat.id }}" class="contact-card" onclick="loadChat_messages('{{ data.chat.id }}', '{{ data.chat.first_name }}', '{{ data.chat.last_name }}')">
+    <input type="hidden" id="chat-id" value="{{ data.chat.id }}">
+    <img src="/static/chatapp/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture.jpg" class="contact-picture">
+    <div class="contact-details">    
+        <div class="message-info">
+            <h5>{{data.chat.first_name }} {{data.chat.last_name}}</h5>
+            <span class="time smaller-text light">{{ data.last_message.timestamp|date:"Y-m-d H:i" }}</span>
+        </div>
+        <div class="message-info">
+            <div style="display: flex;">
+                <span id="user-status-{{data.chat.id}}" class="status">{{data.status}}</span> : <p  class="message-preview">{{ data.last_message.message|truncatewords:10 }}</p>
+            </div>
+            <span id="unread-count" class="unread-count small-text">{{ data.unread_count }}</span>
+        </div>
+    </div>
+</div>
+{% empty %}
+    <p>No contacts available.</p>
+{% endfor %}
+
