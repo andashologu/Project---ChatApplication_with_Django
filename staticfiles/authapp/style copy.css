@@ -1,0 +1,183 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(rgb(241, 246, 251) 0%, rgb(250, 252, 255) 50%, rgb(241, 246, 251) 100%);
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    min-height: 700px;
+    min-width: 400px;
+    max-width: 1920px;
+    padding: 0 55px;
+}
+.drop-shadow {
+    position: relative;
+    background: #fff;
+}
+.drop-shadow:before, .drop-shadow:after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+}
+
+.lifted {
+    border-radius: 4px;
+}
+.lifted:before, .lifted:after {
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    max-width: 300px;
+    max-height: 100px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+}
+.lifted:after {
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+
+
+
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.input-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.input-field input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.input-field input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+button {
+    width: 250px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: auto;
+    padding: 15px 25px;
+    margin-top: 35px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.extra-options {
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+a{
+    text-decoration: none;
+}
+
+.extra-options a:hover {
+    text-decoration: underline;
+}
+
+.signup-option {
+    text-align: center;
+    margin-top: 20px;
+    align-self: flex-end;
+    position: absolute;
+    bottom: 45px;
+}
+
+.signup-option span {
+    margin-right: 8px;
+    color: #555;
+}
+
+.signup-btn {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-btn:hover {
+    text-decoration: underline;
+}
+.larger-text{
+    font-size: 55px;
+}
+.small-text {
+    font-size: 15px;
+}
+.medium-text{
+    font-size: 18px;
+}
+.medium-text.light, .small-text.light{
+    color:gray;
+}
+.login-form h5{
+    text-align: center;
+    margin-block-end: 0.7em;
+}
+.horizontal-line{
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    transform: scaleY(0.5); /* Shrinks the height to half visually */
+    transform-origin: top;
+}
+.horizontal-line.light{
+    height: 4px;
+    background-color: lightgray;
+}
+.input-field{
+    border: none;
+    width: 100%;
+    height: 55px;
+}
+.input-field::placeholder{
+    font-size: 18px;
+}
+input:focus {
+    border: none; /* Remove the border when the input is focused */
+    outline: none; /* Optionally, remove the default browser outline */
+  }
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.bold{
+    font-weight: bold;
+}
