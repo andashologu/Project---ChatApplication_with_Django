@@ -27,7 +27,11 @@ SECRET_KEY = 'django-insecure-uob!ponq4n8-0sdd85c@!_ne_fr*ahtbku=#48_ec$8717of(5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['your-app-name.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'chatapplication-with-django.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
 
 AUTH_USER_MODEL = 'authapp.CustomUser'
 
