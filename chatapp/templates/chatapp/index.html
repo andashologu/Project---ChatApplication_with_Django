@@ -145,6 +145,12 @@
             const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
             chatSocket = new WebSocket(`${protocol}${window.location.host}/ws/chat/${userId}/`);
 
+            chatSocket.onopen = () => console.log('WebSocket connected');
+            chatSocket.onmessage = (event) => console.log('Message received:', event.data);
+            chatSocket.onclose = (event) => console.log('WebSocket closed:', event);
+            chatSocket.onerror = (error) => console.error('WebSocket error:', error);
+
+
             chatSocket.addEventListener('open', onWebSocketOpen); // loading chats once WebSocket connected is established
             function onWebSocketOpen(event) {
                 loadChats();
