@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-uob!ponq4n8-0sdd85c@!_ne_fr*ahtbku=#48_ec$8717of(5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = [
     'chatapplication-with-django.onrender.com',
     'localhost',
