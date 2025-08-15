@@ -17,6 +17,12 @@ def main():
     execute_from_command_line(sys.argv)
 
 if __name__ == '__main__':
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chat_project.settings')
+
+    # ✅ Setup Django before accessing models
+    import django
+    django.setup()
+
     if os.environ.get('RENDER') and os.environ.get('CREATE_SUPERUSER') == 'True':
         from django.contrib.auth import get_user_model
         User = get_user_model()
@@ -26,4 +32,5 @@ if __name__ == '__main__':
                 email=os.environ['DJANGO_SUPERUSER_EMAIL'],
                 password=os.environ['DJANGO_SUPERUSER_PASSWORD']
             )
+
     main()
