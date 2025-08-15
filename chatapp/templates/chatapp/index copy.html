@@ -1,74 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chat</title>
-  <link rel="stylesheet" href="/static/chatapp/style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="/static/chatapp/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <input type="hidden" id="sender-id" value="{{ request.user.id }}">
-
-  <!-- Top Menu Bar -->
-  <header class="menu-bar">
-    <h1>Chat</h1>
-    <div class="menu-actions">
-      <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit" class="btn logout-btn">Logout</button>
-      </form>
-      <button class="btn settings-btn" aria-label="Settings">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#5f6368">
-          <path d="M370-80l-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/>
-        </svg>
-      </button>
+    <input type="hidden" id="sender-id" value="{{ request.user.id }}"> <!--temp-->
+    <div class="menu-bar">
+        <div>
+            <h5 style="font-size: 22px; margin: 0; color: black" >Chat</h5>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}  <!-- Include CSRF token for security -->
+                <button type="submit">Logout</button>  <!-- Use a button to trigger the POST request -->
+            </form>
+        </div>
+        <svg class="setting-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></svg>
     </div>
-  </header>
-
-  <!-- Main Chat Container -->
-  <div class="container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <form class="search-box" id="search-form">
-        <input type="text" name="q" id="search-input" placeholder="Search contacts..." />
-        <button type="submit" class="btn search-btn" aria-label="Search">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#5f6368">
-            <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
-          </svg>
-        </button>
-      </form>
-
-      <!-- Filled by /chats/ -> chat.html -->
-      <div id="chats" class="contacts-container" role="list"></div>
-    </aside>
-
-    <!-- Chat Window -->
-    <section class="chat-window">
-      <header class="chat-header">
-        <img src="/static/chatapp/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture.jpg" alt="Active Contact" class="active-contact-picture">
-        <div id="chat_details">
-          <h5></h5>
-          <input type="hidden" id="contact-id">
-          <p class="status-text">status</p>
+    <div  class="container">
+        <div class="sidebar">
+            <!-- Search box for contacts -->
+            <form class="search-box" id="search-form" method="GET" action="{% url 'chats_view' %}">
+                <input style="background-color: transparent;" class="small-text" type="text" type="text" name="q" id="search-input" placeholder="Search contacts...">
+                <button type="submit"><svg class="search-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></button>
+            </form>         
+            <div id="chats" class="contacts-container">
+                <!--chats will be listed here-->
+            </div>
         </div>
-      </header>
-
-      <div class="chat-area">
-        <!-- Filled by /chat/<id>/ -> message.html -->
-        <div class="chat-messages"></div>
-
-        <div class="chat-input">
-          <input id="message-input" type="text" placeholder="Type a message...">
-          <button id="send-message-btn" class="btn send-btn">Send</button>
+        <div class="chat-window">
+            <div class="chat-header">
+                <img src="/static/chatapp/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture.jpg" alt="Active Contact" class="active-contact-picture">
+                <div id="chat_details">
+                    <h5 style="font-size: 22px; margin: 0;"></h5>
+                    <input type="hidden" id="contact-id">
+                    
+                    <p class="small-text light">status</p>
+                </div>
+            </div>
+            <div id="" class="chat-area">
+                <!--div class="time smaller-text light">Today</div-->
+                <div class="chat-messages"></div>
+                <div class="chat-input">
+                    <!-- Input field and button to send new messages -->
+                    
+                    <input id="message-input" class="small-text" type="text" placeholder="Type a message...">
+                    <button id="send-message-btn" class="small-text">Send</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- JS (unchanged) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--LOUD CONTACTS-->
+    <script>
         // Fetch the contacts or search results from the server
         function loadChats(searchQuery = "") {
             const url = searchQuery ? `/chats/?q=${encodeURIComponent(searchQuery)}` : "/chats/";
@@ -80,8 +66,6 @@
                     return response.json();
                 })
             .then(responseData => {
-                console.log("responseData");
-                console.log(responseData);
                 const html = responseData.html;
                 let chatIds = responseData.data;
                 document.querySelector(".contacts-container").innerHTML = html; 
@@ -182,11 +166,12 @@
             sendMessage(chatId, senderId, message);
             messageInputDom.value = '';  // Clear the input field after sending
 
-            // Update message preview
-            const messagePreview = document.querySelector('.contact-card#contact-' + chatId + ' .message-preview');
-            if (messagePreview) {
-                messagePreview.innerHTML = message;  
-            }
+
+        // Update message preview
+        const messagePreview = document.querySelector('.contact-card#contact-' + chatId + ' .message-preview');
+        if (messagePreview) {
+            messagePreview.innerHTML = message;  
+        }
 
     });
     </script>
@@ -205,40 +190,18 @@
                 }
                 return;  // Don't respond to status updates either
             }
+
             // Handle chat messages
             else if (data.message_html) {
                 const contactId = document.querySelector("#contact-id")?.value;
-                console.log("contactId: "+ contactId );
-                 console.log("contactId: "+ data.sender_id );
-                  console.log("contactId: "+ data.recipient_id );
-                console.log("on message. data: " + data);
-                console.log( data);
                 if (contactId == data.sender_id || contactId == data.recipient_id) {
                     const chatWindow = document.querySelector(".chat-messages");
                     chatWindow.innerHTML += data.message_html;
                     chatWindow.scrollTop = chatWindow.scrollHeight;
-                    console.log("if");
-                    
-                    if (contactId == data.sender_id ) {
-
-                        const messagePreview = document.querySelector('.contact-card#contact-' + data.sender_id + ' .message-preview');
-                        if (messagePreview) {
-                            messagePreview.innerHTML = data.message_text;  
-                            chatSocket.send(JSON.stringify({
-                        'message_id': data.message_id,
-                        'status': 'read'
-                    }));
-                        }
-                    }
-                    
-
-                } 
-                else {
-                    console.log("else");
+                } else {
                     const messagePreview_el = document.querySelector('.contact-card#contact-' + data.sender_id + ' .message-preview');
                     const unreadCount_el = document.querySelector('.contact-card#contact-' + data.sender_id + ' .unread-count');
                     if (messagePreview_el && unreadCount_el) {
-                        console.log("if 2");
                         // Update the message preview with the new message text
                         messagePreview_el.innerHTML = data.message_text;
 
@@ -266,5 +229,5 @@
             }));
         }
     </script>
-</body>
-</html>
+    </body>
+    </html>

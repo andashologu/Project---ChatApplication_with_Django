@@ -1,0 +1,11 @@
+{% for message in messages %}
+    <div class="chat-message {% if message.sender == current_user %}sent{% else %}received{% endif %}" id="msg-{{ message.id }}">
+        <p class="message-text">{{ message.message }}</p>
+        <span class="time">{{ message.timestamp|date:"Y-m-d H:i" }}</span>
+        {% if message.sender == current_user %}
+            <span class="status-indicator">{{ message.status|capfirst }}</span>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>No messages to display.</p>
+{% endfor %}

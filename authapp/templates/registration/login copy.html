@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/authapp/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container drop-shadow lifted">
+        <form id="login-form" method="post" class="login-form">
+            {% csrf_token %}
+            <h5 class="larger-text">Login</h5>
+            <div id="error-messages"></div>
+            <div class="field-wrapper">
+                <input class="input-field medium-text" type="text" id="username" name="username" placeholder="Username" required>
+                <div class="horizontal-line light"></div>
+                <input class="input-field medium-text" type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="extra-options">
+                <div>
+                    <input type="checkbox" id="rememberMe" name="rememberMe"/>
+                    <label  class="medium-text" for="rememberMe" class="small-text">Keep me Signed in</label>
+                </div>
+                <a class="medium-text light" href="#" >Forgot password</a>
+            </div>
+            <button class="small-text" type="submit">Login</button>
+                <div class="signup-option medium-text">
+                    <span class="light">Don't have an account?</span>
+                    <a href="#" class="signup-btn medium-text bold">Sign Up</a>
+                </div>
+            
+           
+            
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent default form submission
+    
+            // Create form data for AJAX request
+            const formData = new FormData(this);
+            // Log form data
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);  // This will log the username and password values
+            }
+            // Perform AJAX request to login
+            fetch("{% url 'login' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value  // CSRF token
+                }
+            })
+            .then(response => response.json())  // Parse response as JSON
+            .then(data => {
+                if (data.success) {
+                    // Store the tokens in localStorage
+                    localStorage.setItem('access_token', data.access_token);
+                    localStorage.setItem('refresh_token', data.refresh_token);
+    
+                    // Redirect to the home page
+                    window.location.href = data.redirect_url;
+                } else {
+                    // Display errors if any
+                    document.getElementById('error-messages').innerHTML = JSON.stringify(data.errors);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+       
+</body>
+</html>

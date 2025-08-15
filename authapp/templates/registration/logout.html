@@ -1,10 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Logged Out</title>
+    <title>Logout</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 </head>
 <body>
-    <h1>You have been logged out</h1>
-    <p>Thank you for visiting our site. You can <a href="{% url 'login' %}">log in again</a> or go back to <a href="{% url 'chat' %}">chat</a>.</p>
+    <div class="auth-container">
+        <div class="logout-message">You have been logged out.</div>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <button type="submit">Login Again</button>
+        </form>
+    </div>
 </body>
 </html>

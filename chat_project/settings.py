@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'channels',
-    'django_elasticsearch_dsl',
+    #'django_elasticsearch_dsl',
 ]
 
 # Define ASGI application for Channels
@@ -111,11 +111,11 @@ LOGIN_URL = '/login/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database_name',
-        'USER': 'username',
+        'NAME': 'postgres',
+        'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 
@@ -163,7 +163,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 ELASTICSEARCH_DSL = {
-    'default': {
-        'hosts': 'http://localhost:9200',  # Adjust this if your ElasticSearch is running elsewhere
-    },
+    #'default': {
+     #   'hosts': 'http://localhost:9200',  # Adjust this if your ElasticSearch is running elsewhere
+    #},
 }
