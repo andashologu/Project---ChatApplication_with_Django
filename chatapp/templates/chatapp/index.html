@@ -142,24 +142,25 @@
 
         // Function to open WebSocket connection (only once for the user)
         function openChatSocket(userId) {
-            chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${userId}/`);
+            const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+            chatSocket = new WebSocket(`${protocol}${window.location.host}/ws/chat/${userId}/`);
 
-            chatSocket.addEventListener('open', onWebSocketOpen);//loading chats once Websocket connected is established
+            chatSocket.addEventListener('open', onWebSocketOpen); // loading chats once WebSocket connected is established
             function onWebSocketOpen(event) {
-                loadChats(); 
-                chatSocket.removeEventListener('open', onWebSocketOpen);//removing listener to avoid re-subscription
+                loadChats();
+                chatSocket.removeEventListener('open', onWebSocketOpen); // removing listener to avoid re-subscription
             }
 
             chatSocket.onmessage = function(e) {
                 const data = JSON.parse(e.data);
                 handleMessage(data);
             };
-        
 
             chatSocket.onclose = function(e) {
                 console.error('Chat socket closed unexpectedly');
             };
         }
+
     </script>
     <script>
         // Function to send a message via WebSocket
